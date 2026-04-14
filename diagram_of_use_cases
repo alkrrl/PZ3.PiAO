@@ -1,37 +1,48 @@
 @startuml
 left to right direction
-"Пользователь" as u
-"Администратор" as a
+
+actor "Пользователь" as u
+actor "Администратор" as a
 
 package "Облачное хранилище кода" {
-  usecase "Регистрация" as UC1
-  usecase "Вход" as UC2
-  usecase "Загрузить проект" as UC3
-  usecase "Загрузить функцию" as UC4
-  usecase "Поиск кода(по годам,предметам)" as UC5
-  usecase "Скачать файл" as UC6
-  usecase "Скопировать" as UC7
+
+  usecase "Вход" as UC1
+  usecase "Регистрация" as UC2
+  usecase "Скачать файл" as UC3
+  usecase "Поиск кода" as UC4
+  usecase "Загрузить код" as UC5
+  usecase "Управление тегами" as UC6
+  usecase "Оценить/комментировать" as UC7
   usecase "Сохранить код" as UC8
-  usecase "Оценить код/оставить комментарий коду" as UC9
-  usecase "Управление тегами(по годам,предметам)" as UC10
-  usecase "Управлять пользователями" as UC11
-  usecase "Просмотр статиски" as UC12
+  usecase "Скопировать код" as UC9
+  usecase "Статистика" as UC10
+  
+  usecase "Управление пользователями" as UC11
+
+  usecase "Разбиение по предмету" as subject
+  usecase "Разбиение по годам" as year
+  usecase "Комментарий" as comment
+
+  u --> UC1
+  u --> UC2
+  u --> UC3
+  u --> UC4
+  u --> UC5
+  u --> UC6
+  u --> UC7
+  u --> UC8
+  u --> UC9
+  u --> UC10
+
+  a --|> u
+  a --> UC11
+
+  UC7 --|> UC1 : обязательно
+  UC8 --|> UC1 : обязательно
+  UC5 --|> UC6 : обязательно
+
+  UC4 <.. subject : дополнительно
+  UC4 <.. year : дополнительно
+  UC7 <.. comment : дополнительно
 }
-
-u --> UC1
-u --> UC2
-u --> UC3
-u --> UC4
-u --> UC5
-u --> UC6
-u --> UC7
-u --> UC8
-u --> UC9
-u --> UC10
-
-a --> UC1
-a --> UC2
-a --> UC11
-a --> UC12
-
 @enduml
