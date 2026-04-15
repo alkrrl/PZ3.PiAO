@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+node "Клиент" as Client {
+  [Браузер]
+}
+
+node "Сервер" as Server {
+  node "Веб-сервер" as WebServer
+  node "База данных" as Database
+  node "Хранилище файлов" as FileStorage
+}
+
+node "Админ" as Admin {
+  [Панель админа]
+}
+
+Client --> WebServer : запросы
+WebServer --> Database : чтение/запись
+WebServer --> FileStorage : код
+Admin --> WebServer : управление
+
+@enduml
