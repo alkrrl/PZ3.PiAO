@@ -1,1 +1,89 @@
+@startuml
 
+class User {
+  - id: UUID
+  - email: String
+  - password: String
+  - name: String
+  + login()
+  + register()
+}
+
+class Administrator {
+  - access: int
+  + manage()
+  + viewstatistics()
+}
+
+Administrator --|> User
+
+class Code {
+  - title: String
+  - content: String
+  - isAvailable: boolean
+  - isSufficient: boolean
+  + download()
+  + copy()
+  + save()
+}
+
+class Function {
+  - returnType: String
+  + execute()
+}
+
+class Project {
+  - mainFile: String
+  + build()
+}
+
+
+Function --|> Code
+Project --|> Code
+
+class Tag {
+  - id: UUID
+  - name: String
+}
+
+class YearTag {
+  - yearValue: int
+}
+
+class SubjectTag {
+  - subjectName: String
+}
+
+
+YearTag --|> Tag
+SubjectTag --|> Tag
+Code -- Tag
+
+class Rating {
+  - value: int
+}
+
+class Comment {
+  - text: String
+}
+
+User -- Rating
+User -- Comment
+Code -- Rating
+Code -- Comment
+
+class TagManager {
+  + addTag()
+  + removeTag()
+}
+
+TagManager --> Tag
+TagManager --> Code
+
+class Statistics {
+  + getStats()
+}
+
+Administrator --> Statistics : использует
+
+@enduml
